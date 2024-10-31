@@ -1,0 +1,16 @@
+{
+  "name": "node-bug-napi-tsfn",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "node-gyp rebuild && valgrind -q node index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "gypfile": true,
+  "description": "",
+  "dependencies": {
+    "node-gyp": "^10.2.0"
+  }
+}
