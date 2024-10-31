@@ -1,9 +1,11 @@
 const process = require("process");
 
+const modes = ["broken", "fixed", "atomic_flag"];
+
 const mode = process.argv[2];
-if (process.argv.length !== 3 || (mode !== "broken" && mode !== "fixed")) {
+if (process.argv.length !== 3 || !modes.includes(mode)) {
   console.error(
-    `Usage: node index.js [broken|fixed] ${JSON.stringify(process.argv)}`
+    `Usage: node index.js [${modes.join("|")}] ${JSON.stringify(process.argv)}`
   );
   process.exit(1);
 }
