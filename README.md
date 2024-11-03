@@ -25,3 +25,8 @@ While working around this is technically possible (see [src/run/fixed.hpp](https
 
 - Finalization should lock the mutex to make concurrent calls safe.
 - Finalization should put the TSFN into a state where all its relevant resources are released, but *only* delete the actual TSFN object if there are no more handles to it. Otherwise the actual deletion should be deferred until one of `napi_release_threadsafe_function` or `napi_call_threadsafe_function` decreases the thread_count to zero.
+- In this finalized-but-not-yet deleted state, the operations mentioned above should work as follows:
+  - `napi_get_threadsafe_function_context` should return the stored context pointer as usual
+  - `napi_call_threadsafe_function` should return `napi_closing`, decrease the thread_count and if it falls to zero delete the TSFN
+  - `napi_acquire_threadsafe_function` should return `napi_closing`
+  - `napi_release_threadsafe_function` should return `napi_ok`, decrease the thread_count and if it falls to zero delete the TSFN
