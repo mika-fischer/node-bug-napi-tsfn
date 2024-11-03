@@ -1,6 +1,6 @@
 # `napi_threadsafe_function` is very hard to use safely
 
-- Node.js issue: TODO
+- Node.js issue: https://github.com/nodejs/node/issues/55706
 
 ## Description of the bug
 
